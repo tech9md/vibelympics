@@ -1,33 +1,139 @@
-# Challenge 1: App with Emoji-Only UI
+# 🏠✨ Emoji Housekeeping Board
 
-<img src="../assets/emojis.png" width="700" alt="Emojis">
+A **fully emoji-only** housekeeping status board for hotels, Airbnbs, offices, and cleaning services. No text in any interactive elements - just pure emoji communication that transcends language barriers.
 
-## Themes
-- Build with Chainguard Containers
-- Get weird
+## 🎯 What It Does
 
-## The Challenge
-Build a fully functional application where the entire user interface uses ONLY emojis. No text allowed in any interactive elements - buttons, navigation, labels, everything must be emojis. Extra points if, like, everything is emojis.
+This is a real-world task tracking board where cleaning staff can:
 
-## Requirements
-- All UI elements must be emojis only (no text in the interface)
-- Ideally the app will actually do something
-- Must be containerized using Chainguard Containers. You can set it up with a Dockerfile and we'll build and run locally. If it's a web app, it should able to be run on some port and be seen locally. If it's a CLI app, we'll run the default entrypoint and go from there. Feel free to give us directions in the README (replace this file).
+- ➕ Add rooms/areas by type (🛏️ bedroom, 🛋️ living room, 🍳 kitchen, etc.)
+- 🔄 Track task completion by tapping to cycle status (❌ → ⏳ → ✅)
+- 👥 Assign rooms to staff members by tapping avatar icons
+- 📊 Filter by status or staff member
+- 🎉 Celebrate completions with animations
+- 🎨 All without reading a single word
 
-## Dumb Ideas
+### Task Types
+| 🧹 | 🧽 | 🛏️ | 🪟 | 🚽 | 🗑️ |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| Sweep | Scrub | Make Bed | Windows | Toilet | Trash |
 
-Stuck? Here are some derivative ideas!
+> **Smart Tasks**: Tasks are context-aware based on room type. The 🛏️ (Make Bed) task only appears for bedrooms and whole-house cleaning. All other tasks appear for all room types.
 
-- Calculator (🔢 ➕ ➖ ✖️ ➗)
-- To Do app (✅ ❌ 📝 🗑️)
-- Weather app (☀️ 🌧️ ❄️ 🌡️)
-- Music player (▶️ ⏸️ ⏭️ 🔀 🔁)
-- Mini game (🎮)
-- Demonic energy detector (😈)
-- Beanie baby collection database / sorter (🐢🧸, topical!)
+### Status Flow
+```
+❌ (Not started) → ⏳ (In progress) → ✅ (Complete)
+```
 
-## Submission
-To submit, simply replace the contents of this folder (round_1) with the code for your project. Make sure to replace this README.md with instructions on getting your project running. Also make sure your vibelympics repository is public and that you've pushed all the code you want us to see. We will pull in your submission directly from your repository.
+### Room Status
+```
+🔴 All tasks pending
+🟡 Some tasks in progress
+🟢 All tasks complete
+```
 
-## Deadline
-December 4, 11:59 PM EST
+### Staff Avatars
+| 👤 | 👩 | 👨 | 👩‍🦰 | 👨‍🦱 | 👩‍🦳 | 👷 | 🧑‍🔧 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Unassigned | Staff 1 | Staff 2 | Staff 3 | Staff 4 | Staff 5 | Staff 6 | Staff 7 |
+
+> Tap the avatar in any room card to cycle through staff. Staff with assigned rooms appear in the header for quick filtering.
+
+## 🐳 Running with Docker (Chainguard)
+
+### Build the container
+```bash
+docker build -t emoji-housekeeping .
+```
+
+### Run locally
+```bash
+docker run -p 3000:3000 emoji-housekeeping
+```
+
+Then open **http://localhost:3000** in your browser.
+
+### With persistent data (optional)
+To persist data across container restarts, you can mount a local file:
+```bash
+# Create local data file
+echo "[]" > data.json
+
+# Run with volume mount
+docker run -p 3000:3000 -v $(pwd)/data.json:/app/backend/data.json emoji-housekeeping
+```
+
+## 🛠️ Local Development (without Docker)
+
+### Prerequisites
+- Node.js 18+
+- npm
+
+### Install dependencies
+```bash
+npm run install:all
+```
+
+### Run in development mode
+```bash
+npm run dev
+```
+
+Frontend runs on http://localhost:5173
+Backend API runs on http://localhost:3000
+
+### Build for production
+```bash
+npm run build
+npm start
+```
+
+## 🏗️ Project Structure
+
+```
+emoji-housekeeping/
+├── frontend/          # React + Vite frontend
+│   ├── src/
+│   │   ├── App.jsx    # Main app component
+│   │   ├── main.jsx   # React entry point
+│   │   └── index.css  # Styles
+│   └── ...
+├── backend/           # Express API server
+│   └── server.js
+├── Dockerfile         # Chainguard container config
+└── README.md
+```
+
+## 🔌 API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/rooms` | GET | 📋 Get all rooms |
+| `/api/rooms` | POST | 💾 Save room data |
+| `/api/health` | GET | ✅ Health check |
+
+## 📱 Features
+
+- **📱 Mobile-friendly** - Touch-optimized for tablets and phones
+- **🌐 Universal** - Works across all languages
+- **⚡ Fast** - Lightweight and responsive
+- **💾 Persistent** - Data survives container restarts
+- **🎨 Dark mode** - Easy on the eyes in any lighting
+- **🧠 Smart tasks** - Context-aware tasks based on room type
+- **👥 Staff assignment** - Assign and filter rooms by team member
+- **🎉 Celebrations** - Animated feedback when tasks/rooms complete
+
+## 🤔 Why Emoji-Only?
+
+1. **🌍 Language barriers** - Cleaning crews are often multilingual
+2. **⏱️ Speed** - Tap, don't type
+3. **👀 Glanceability** - Status visible from across the room
+4. **🎯 Reduced errors** - No typos, no misunderstandings
+
+## 📜 License
+
+MIT
+
+---
+
+Built for the Vibelympics 🏆 Vibe Coding Challenge
