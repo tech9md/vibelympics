@@ -46,7 +46,8 @@ class FastAuditOrchestrator(AuditOrchestrator):
         try:
             metadata = await self.pypi_client.get_package_metadata(package_name, version)
         except Exception as e:
-            raise ValueError(f"Could not fetch package '{package_name}': {str(e)}")
+            error_message = await self._generate_user_friendly_error(package_name, e)
+            raise ValueError(error_message)
 
         actual_version = metadata.get("version", version or "unknown")
 

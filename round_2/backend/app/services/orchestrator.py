@@ -83,6 +83,57 @@ class AuditOrchestrator:
         # All analyzers for backwards compatibility
         self.analyzers = self.metadata_analyzers + self.code_analyzers
 
+    async def _generate_user_friendly_error(self, package_name: str, error: Exception) -> str:
+        """
+        Generate a user-friendly error message with typo suggestions.
+
+        Args:
+            package_name: The package name that failed to fetch
+            error: The original exception
+
+        Returns:
+            User-friendly error message
+        """
+        error_str = str(error).lower()
+
+        # Check if it's a 404 (package not found)
+        if "404" in error_str or "not found" in error_str:
+            # Find similar package names using the typosquatting analyzer
+            typosquatting_analyzer = next(
+                (a for a in self.metadata_analyzers if isinstance(a, TyposquattingAnalyzer)),
+                None
+            )
+
+            if typosquatting_analyzer:
+                # Load top packages and find similar ones
+                top_packages = await typosquatting_analyzer._load_top_packages()
+                name_normalized = package_name.lower().replace("-", "").replace("_", "")
+                similar = typosquatting_analyzer._find_similar_packages(name_normalized, top_packages)
+
+                if similar:
+                    # Get the closest match
+                    closest_match = similar[0][0]  # (name, distance, rank)
+                    message = f"Package '{package_name}' not found on PyPI. Did you mean '{closest_match}'?"
+                    if len(similar) > 1:
+                        other_suggestions = [s[0] for s in similar[1:3]]  # Get next 2 suggestions
+                        message += f" Other suggestions: {', '.join(other_suggestions)}."
+                    message += f" Verify at: https://pypi.org/search/?q={package_name}"
+                    return message
+
+            # No similar packages found
+            return (
+                f"Package '{package_name}' not found on PyPI. "
+                f"Please check the package name spelling and verify it exists at: "
+                f"https://pypi.org/search/?q={package_name}"
+            )
+
+        # For other errors, provide a generic user-friendly message
+        return (
+            f"Unable to fetch package '{package_name}'. "
+            f"This could be due to network issues, PyPI being temporarily unavailable, or the package/version not existing. "
+            f"Please try again or check: https://pypi.org/project/{package_name}/"
+        )
+
     async def run_audit(
         self,
         package_name: str,
@@ -111,7 +162,8 @@ class AuditOrchestrator:
             metadata = await self.pypi_client.get_package_metadata(package_name, version)
         except Exception as e:
             logger.error(f"Failed to fetch package metadata for {package_name}: {e}")
-            raise ValueError(f"Could not fetch package '{package_name}': {str(e)}")
+            error_message = await self._generate_user_friendly_error(package_name, e)
+            raise ValueError(error_message)
 
         actual_version = metadata.get("version", version or "unknown")
         logger.info(f"Analyzing {package_name}@{actual_version}")
