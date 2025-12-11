@@ -1,0 +1,254 @@
+2025-12-10 15:16:05 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:16:05 | INFO     | test:<module>:1 | Logging test successful
+2025-12-10 15:23:20 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:23:20 | ERROR    | app.utils.errors:sanitize_error_message:38 | Error details (hidden from user): Internal path: /etc/passwd/secrets
+NoneType: None
+2025-12-10 15:25:22 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:25:22 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:25:23 | INFO     | app.api.routes:start_audit:76 | Created audit 81c998e8-77fc-4bcc-8c62-44dae1f00fde for requests@latest
+2025-12-10 15:25:23 | INFO     | app.api.routes:run_audit:102 | Started processing audit 81c998e8-77fc-4bcc-8c62-44dae1f00fde
+2025-12-10 15:25:23 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit a0501777-2a8f-46f4-87d4-19f90d735847 for package: requests@latest
+2025-12-10 15:25:23 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:25:23 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:25:24 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:25:30 | INFO     | app.services.orchestrator:run_audit:256 | Audit a0501777-2a8f-46f4-87d4-19f90d735847 completed for requests@2.32.5: score=52.59, risk=medium, duration=7736ms
+2025-12-10 15:25:30 | INFO     | app.api.routes:run_audit:135 | Completed audit 81c998e8-77fc-4bcc-8c62-44dae1f00fde: score=52.59, risk=medium
+2025-12-10 15:25:30 | INFO     | app.api.routes:start_audit:76 | Created audit 6bceefea-0cf2-4369-86c2-6e04d7b1a79f for flask@2.0.0
+2025-12-10 15:25:30 | INFO     | app.api.routes:run_audit:102 | Started processing audit 6bceefea-0cf2-4369-86c2-6e04d7b1a79f
+2025-12-10 15:25:30 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit bf6c1fe9-9ce6-4b36-9060-d868f2a52dac for package: flask@2.0.0
+2025-12-10 15:25:31 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing flask@2.0.0
+2025-12-10 15:25:31 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\flask-2.0.0\Flask-2.0.0
+2025-12-10 15:25:32 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 2 vulnerabilities for flask@2.0.0
+2025-12-10 15:25:38 | INFO     | app.services.orchestrator:run_audit:256 | Audit bf6c1fe9-9ce6-4b36-9060-d868f2a52dac completed for flask@2.0.0: score=51.92, risk=medium, duration=7715ms
+2025-12-10 15:25:38 | INFO     | app.api.routes:run_audit:135 | Completed audit 6bceefea-0cf2-4369-86c2-6e04d7b1a79f: score=51.92, risk=medium
+2025-12-10 15:25:38 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name cannot be empty
+2025-12-10 15:25:38 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name must contain only alphanumeric characters, hyphens, underscores, and dots. It must start and end with an alphanumeric character.
+2025-12-10 15:25:38 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name cannot contain '..'
+2025-12-10 15:25:38 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name too long. Maximum length is 214 characters (got 300)
+2025-12-10 15:25:38 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Version must contain only alphanumeric characters, dots, hyphens, underscores, and plus signs
+2025-12-10 15:25:38 | WARNING  | app.api.routes:get_audit_status:157 | Audit non-existent-audit-id not found
+2025-12-10 15:25:38 | INFO     | app.api.routes:start_audit:76 | Created audit 4e02815a-86a2-4149-b673-13c1429ed43f for requests@latest
+2025-12-10 15:25:38 | INFO     | app.api.routes:run_audit:102 | Started processing audit 4e02815a-86a2-4149-b673-13c1429ed43f
+2025-12-10 15:25:38 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit b8fd3c3c-9908-4b30-8cb9-d1d4f90fd1c2 for package: requests@latest
+2025-12-10 15:25:38 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:25:39 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:25:40 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:25:45 | INFO     | app.services.orchestrator:run_audit:256 | Audit b8fd3c3c-9908-4b30-8cb9-d1d4f90fd1c2 completed for requests@2.32.5: score=52.59, risk=medium, duration=7330ms
+2025-12-10 15:25:45 | INFO     | app.api.routes:run_audit:135 | Completed audit 4e02815a-86a2-4149-b673-13c1429ed43f: score=52.59, risk=medium
+2025-12-10 15:25:45 | WARNING  | app.api.routes:get_audit_report:178 | Report requested for non-existent audit non-existent-audit-id
+2025-12-10 15:25:46 | INFO     | app.api.routes:start_audit:76 | Created audit 406effbd-7cd7-4182-bc02-a54d912973e9 for requests@latest
+2025-12-10 15:25:46 | INFO     | app.api.routes:run_audit:102 | Started processing audit 406effbd-7cd7-4182-bc02-a54d912973e9
+2025-12-10 15:25:46 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 0f21b19a-52c0-4847-91f0-6bde5800edea for package: requests@latest
+2025-12-10 15:25:46 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:25:46 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:25:47 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:25:53 | INFO     | app.services.orchestrator:run_audit:256 | Audit 0f21b19a-52c0-4847-91f0-6bde5800edea completed for requests@2.32.5: score=52.59, risk=medium, duration=7127ms
+2025-12-10 15:25:53 | INFO     | app.api.routes:run_audit:135 | Completed audit 406effbd-7cd7-4182-bc02-a54d912973e9: score=52.59, risk=medium
+2025-12-10 15:25:53 | INFO     | app.api.routes:start_audit:76 | Created audit 512fc2e6-8345-4b00-a9a1-ebcbfe2873e3 for requests@latest
+2025-12-10 15:25:53 | INFO     | app.api.routes:run_audit:102 | Started processing audit 512fc2e6-8345-4b00-a9a1-ebcbfe2873e3
+2025-12-10 15:25:53 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit ddd0438f-0076-43fc-a0de-b3ed66860bf6 for package: requests@latest
+2025-12-10 15:25:53 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:25:54 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:25:55 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:26:00 | INFO     | app.services.orchestrator:run_audit:256 | Audit ddd0438f-0076-43fc-a0de-b3ed66860bf6 completed for requests@2.32.5: score=52.59, risk=medium, duration=6882ms
+2025-12-10 15:26:00 | INFO     | app.api.routes:run_audit:135 | Completed audit 512fc2e6-8345-4b00-a9a1-ebcbfe2873e3: score=52.59, risk=medium
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | app.api.routes:get_audit_sbom:205 | SBOM requested for non-existent audit nonexistent-audit-id
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | app.api.routes:get_audit_sbom:205 | SBOM requested for non-existent audit invalid-id
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:00 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:26:57 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:26:57 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:26:57 | INFO     | app.api.routes:start_audit:76 | Created audit 37bf1308-9a69-42b4-8526-25ae80ed9c8e for requests@latest
+2025-12-10 15:26:57 | INFO     | app.api.routes:run_audit:102 | Started processing audit 37bf1308-9a69-42b4-8526-25ae80ed9c8e
+2025-12-10 15:26:57 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit fd2637f3-3b80-41f8-a03c-74605b8087f3 for package: requests@latest
+2025-12-10 15:26:57 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:26:58 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:26:58 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:27:05 | INFO     | app.services.orchestrator:run_audit:256 | Audit fd2637f3-3b80-41f8-a03c-74605b8087f3 completed for requests@2.32.5: score=52.59, risk=medium, duration=8357ms
+2025-12-10 15:27:05 | INFO     | app.api.routes:run_audit:148 | Completed audit 37bf1308-9a69-42b4-8526-25ae80ed9c8e: score=52.59, risk=medium
+2025-12-10 15:27:05 | INFO     | app.api.routes:start_audit:76 | Created audit 13cb5278-2713-4548-8a4b-99fe84bf6f18 for flask@2.0.0
+2025-12-10 15:27:05 | INFO     | app.api.routes:run_audit:102 | Started processing audit 13cb5278-2713-4548-8a4b-99fe84bf6f18
+2025-12-10 15:27:05 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 330a77e4-7bff-44b4-9ad3-2b0e69933675 for package: flask@2.0.0
+2025-12-10 15:27:05 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing flask@2.0.0
+2025-12-10 15:27:06 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\flask-2.0.0\Flask-2.0.0
+2025-12-10 15:27:07 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 2 vulnerabilities for flask@2.0.0
+2025-12-10 15:27:12 | INFO     | app.services.orchestrator:run_audit:256 | Audit 330a77e4-7bff-44b4-9ad3-2b0e69933675 completed for flask@2.0.0: score=51.92, risk=medium, duration=7263ms
+2025-12-10 15:27:12 | INFO     | app.api.routes:run_audit:148 | Completed audit 13cb5278-2713-4548-8a4b-99fe84bf6f18: score=51.92, risk=medium
+2025-12-10 15:27:12 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name cannot be empty
+2025-12-10 15:27:12 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name must contain only alphanumeric characters, hyphens, underscores, and dots. It must start and end with an alphanumeric character.
+2025-12-10 15:27:12 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name cannot contain '..'
+2025-12-10 15:27:12 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name too long. Maximum length is 214 characters (got 300)
+2025-12-10 15:27:12 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Version must contain only alphanumeric characters, dots, hyphens, underscores, and plus signs
+2025-12-10 15:27:12 | WARNING  | app.api.routes:get_audit_status:170 | Audit non-existent-audit-id not found
+2025-12-10 15:27:13 | INFO     | app.api.routes:start_audit:76 | Created audit ef185544-c48c-4be7-ba26-f043a3e29d96 for requests@latest
+2025-12-10 15:27:13 | INFO     | app.api.routes:run_audit:102 | Started processing audit ef185544-c48c-4be7-ba26-f043a3e29d96
+2025-12-10 15:27:13 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit a7e339ad-7c75-4eca-bdce-d7f0a9b2e80d for package: requests@latest
+2025-12-10 15:27:13 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:27:13 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:27:14 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:27:19 | INFO     | app.services.orchestrator:run_audit:256 | Audit a7e339ad-7c75-4eca-bdce-d7f0a9b2e80d completed for requests@2.32.5: score=52.59, risk=medium, duration=6945ms
+2025-12-10 15:27:20 | INFO     | app.api.routes:run_audit:148 | Completed audit ef185544-c48c-4be7-ba26-f043a3e29d96: score=52.59, risk=medium
+2025-12-10 15:27:20 | WARNING  | app.api.routes:get_audit_report:191 | Report requested for non-existent audit non-existent-audit-id
+2025-12-10 15:27:20 | INFO     | app.api.routes:start_audit:76 | Created audit e97e9d77-e95e-4cfb-96c7-f393f70fcba6 for requests@latest
+2025-12-10 15:27:20 | INFO     | app.api.routes:run_audit:102 | Started processing audit e97e9d77-e95e-4cfb-96c7-f393f70fcba6
+2025-12-10 15:27:20 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 6148b036-8e5c-450d-9516-a699898fd664 for package: requests@latest
+2025-12-10 15:27:20 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:27:20 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:27:21 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:27:27 | INFO     | app.services.orchestrator:run_audit:256 | Audit 6148b036-8e5c-450d-9516-a699898fd664 completed for requests@2.32.5: score=52.59, risk=medium, duration=7197ms
+2025-12-10 15:27:27 | INFO     | app.api.routes:run_audit:148 | Completed audit e97e9d77-e95e-4cfb-96c7-f393f70fcba6: score=52.59, risk=medium
+2025-12-10 15:27:27 | INFO     | app.api.routes:start_audit:76 | Created audit daff3d2d-7ff2-4765-af6d-6a199ccf0740 for requests@latest
+2025-12-10 15:27:27 | INFO     | app.api.routes:run_audit:102 | Started processing audit daff3d2d-7ff2-4765-af6d-6a199ccf0740
+2025-12-10 15:27:27 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 5a8bc832-fa9b-498f-8dce-7c04f743f410 for package: requests@latest
+2025-12-10 15:27:27 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:27:28 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:27:29 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:27:34 | INFO     | app.services.orchestrator:run_audit:256 | Audit 5a8bc832-fa9b-498f-8dce-7c04f743f410 completed for requests@2.32.5: score=52.59, risk=medium, duration=7107ms
+2025-12-10 15:27:34 | INFO     | app.api.routes:run_audit:148 | Completed audit daff3d2d-7ff2-4765-af6d-6a199ccf0740: score=52.59, risk=medium
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:27:34 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:00 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:28:01 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:28:01 | INFO     | app.api.routes:start_audit:76 | Created audit 3afc7fcb-5e83-42ea-968f-1d23832a7f57 for requests@latest
+2025-12-10 15:28:01 | INFO     | app.api.routes:run_audit:102 | Started processing audit 3afc7fcb-5e83-42ea-968f-1d23832a7f57
+2025-12-10 15:28:01 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 875797f8-ed11-4836-b86e-d6447d65c35f for package: requests@latest
+2025-12-10 15:28:01 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:28:02 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:28:03 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:28:09 | INFO     | app.services.orchestrator:run_audit:256 | Audit 875797f8-ed11-4836-b86e-d6447d65c35f completed for requests@2.32.5: score=52.59, risk=medium, duration=7853ms
+2025-12-10 15:28:09 | INFO     | app.api.routes:run_audit:148 | Completed audit 3afc7fcb-5e83-42ea-968f-1d23832a7f57: score=52.59, risk=medium
+2025-12-10 15:28:09 | INFO     | app.api.routes:start_audit:76 | Created audit 280cd188-3622-4b37-9380-871faf8be432 for flask@2.0.0
+2025-12-10 15:28:09 | INFO     | app.api.routes:run_audit:102 | Started processing audit 280cd188-3622-4b37-9380-871faf8be432
+2025-12-10 15:28:09 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 8ee94143-dc8e-40a1-9bbf-2d388695e484 for package: flask@2.0.0
+2025-12-10 15:28:09 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing flask@2.0.0
+2025-12-10 15:28:10 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\flask-2.0.0\Flask-2.0.0
+2025-12-10 15:28:11 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 2 vulnerabilities for flask@2.0.0
+2025-12-10 15:28:16 | INFO     | app.services.orchestrator:run_audit:256 | Audit 8ee94143-dc8e-40a1-9bbf-2d388695e484 completed for flask@2.0.0: score=51.92, risk=medium, duration=7535ms
+2025-12-10 15:28:16 | INFO     | app.api.routes:run_audit:148 | Completed audit 280cd188-3622-4b37-9380-871faf8be432: score=51.92, risk=medium
+2025-12-10 15:28:16 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name cannot be empty
+2025-12-10 15:28:16 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name must contain only alphanumeric characters, hyphens, underscores, and dots. It must start and end with an alphanumeric character.
+2025-12-10 15:28:16 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name cannot contain '..'
+2025-12-10 15:28:16 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Package name too long. Maximum length is 214 characters (got 300)
+2025-12-10 15:28:16 | WARNING  | app.api.routes:start_audit:60 | Invalid audit request: Version must contain only alphanumeric characters, dots, hyphens, underscores, and plus signs
+2025-12-10 15:28:16 | WARNING  | app.api.routes:get_audit_status:170 | Audit non-existent-audit-id not found
+2025-12-10 15:28:16 | INFO     | app.api.routes:start_audit:76 | Created audit 40291e89-13ec-4da2-adcb-a02a356ebd5b for requests@latest
+2025-12-10 15:28:16 | INFO     | app.api.routes:run_audit:102 | Started processing audit 40291e89-13ec-4da2-adcb-a02a356ebd5b
+2025-12-10 15:28:16 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 6c817034-aa35-4459-86a0-a0a285123ada for package: requests@latest
+2025-12-10 15:28:17 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:28:17 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:28:18 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:28:24 | INFO     | app.services.orchestrator:run_audit:256 | Audit 6c817034-aa35-4459-86a0-a0a285123ada completed for requests@2.32.5: score=52.59, risk=medium, duration=7505ms
+2025-12-10 15:28:24 | INFO     | app.api.routes:run_audit:148 | Completed audit 40291e89-13ec-4da2-adcb-a02a356ebd5b: score=52.59, risk=medium
+2025-12-10 15:28:24 | WARNING  | app.api.routes:get_audit_report:191 | Report requested for non-existent audit non-existent-audit-id
+2025-12-10 15:28:24 | INFO     | app.api.routes:start_audit:76 | Created audit a3c902cf-08a9-4171-b0af-6805a1f8e226 for requests@latest
+2025-12-10 15:28:24 | INFO     | app.api.routes:run_audit:102 | Started processing audit a3c902cf-08a9-4171-b0af-6805a1f8e226
+2025-12-10 15:28:24 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit fdd72309-29a2-4056-9eb1-1855d9f712d5 for package: requests@latest
+2025-12-10 15:28:24 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:28:25 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:28:26 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:28:31 | INFO     | app.services.orchestrator:run_audit:256 | Audit fdd72309-29a2-4056-9eb1-1855d9f712d5 completed for requests@2.32.5: score=52.59, risk=medium, duration=7142ms
+2025-12-10 15:28:31 | INFO     | app.api.routes:run_audit:148 | Completed audit a3c902cf-08a9-4171-b0af-6805a1f8e226: score=52.59, risk=medium
+2025-12-10 15:28:31 | INFO     | app.api.routes:start_audit:76 | Created audit 6348ce37-dce9-42c4-93ee-c7ef2c498fe7 for requests@latest
+2025-12-10 15:28:31 | INFO     | app.api.routes:run_audit:102 | Started processing audit 6348ce37-dce9-42c4-93ee-c7ef2c498fe7
+2025-12-10 15:28:31 | INFO     | app.services.orchestrator:run_audit:106 | Starting audit 83c4b629-a6e9-46c1-b0f7-7df3b97114c0 for package: requests@latest
+2025-12-10 15:28:32 | INFO     | app.services.orchestrator:run_audit:117 | Analyzing requests@2.32.5
+2025-12-10 15:28:32 | INFO     | app.services.orchestrator:run_audit:126 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-10 15:28:33 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-10 15:28:39 | INFO     | app.services.orchestrator:run_audit:256 | Audit 83c4b629-a6e9-46c1-b0f7-7df3b97114c0 completed for requests@2.32.5: score=52.59, risk=medium, duration=7563ms
+2025-12-10 15:28:39 | INFO     | app.api.routes:run_audit:148 | Completed audit 6348ce37-dce9-42c4-93ee-c7ef2c498fe7: score=52.59, risk=medium
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | app.api.routes:get_audit_sbom:218 | SBOM requested for non-existent audit nonexistent-audit-id
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | app.api.routes:get_audit_sbom:218 | SBOM requested for non-existent audit invalid-id
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:28:39 | WARNING  | slowapi:__evaluate_limits:510 | ratelimit 10 per 1 hour (127.0.0.1) exceeded at endpoint: /api/v1/audit
+2025-12-10 15:36:31 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:36:31 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:36:31 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 1 vulnerabilities for test-package@1.0.0
+2025-12-10 15:36:31 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for safe-package@1.0.0
+2025-12-10 15:36:31 | ERROR    | app.analyzers.vulnerability:_query_osv:91 | OSV API query failed for test-package@1.0.0: Network error
+2025-12-10 15:36:31 | ERROR    | app.analyzers.vulnerability:_query_osv:91 | OSV API query failed for test-package@1.0.0: Request timed out
+2025-12-10 15:36:31 | ERROR    | app.analyzers.vulnerability:_query_osv:91 | OSV API query failed for test-package@1.0.0: 404 Not Found
+2025-12-10 15:36:31 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 1 vulnerabilities for test-package@1.0.0
+2025-12-10 15:36:31 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for safe-package@1.0.0
+2025-12-10 15:36:31 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for test-package@1.0.0
+2025-12-10 15:36:31 | WARNING  | app.analyzers.vulnerability:_query_osv_package:147 | OSV API query failed for package test-package: Network error
+2025-12-10 15:36:31 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 2 vulnerabilities for test-package@1.0.0
+2025-12-10 15:36:51 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:36:51 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:37:27 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:37:27 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:38:16 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:38:16 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:39:57 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:39:57 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:41:44 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:41:44 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:42:11 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:42:11 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:42:25 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:42:25 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 1 vulnerabilities for test-package@1.0.0
+2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for safe-package@1.0.0
+2025-12-10 15:42:25 | ERROR    | app.analyzers.vulnerability:_query_osv:91 | OSV API query failed for test-package@1.0.0: Network error
+2025-12-10 15:42:25 | ERROR    | app.analyzers.vulnerability:_query_osv:91 | OSV API query failed for test-package@1.0.0: Request timed out
+2025-12-10 15:42:25 | ERROR    | app.analyzers.vulnerability:_query_osv:91 | OSV API query failed for test-package@1.0.0: 404 Not Found
+2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 1 vulnerabilities for test-package@1.0.0
+2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for safe-package@1.0.0
+2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for test-package@1.0.0
+2025-12-10 15:42:25 | WARNING  | app.analyzers.vulnerability:_query_osv_package:147 | OSV API query failed for package test-package: Network error
+2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 2 vulnerabilities for test-package@1.0.0

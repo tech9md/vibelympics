@@ -1,0 +1,5 @@
+[console_scripts]
+pyshield = app.cli.main:main
+pyshield-format-check = app.hooks.precommit:main_format_check
+pyshield-package-check = app.hooks.precommit:main_package_check
+pyshield-typo-check = app.hooks.precommit:main_typo_check

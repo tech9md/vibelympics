@@ -1,0 +1,1 @@
+"""PyShield CLI package."""

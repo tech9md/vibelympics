@@ -1,0 +1,20 @@
+- id: pyshield-format-check
+  name: PyShield Format Check
+  description: Validate Python package name format
+  entry: pyshield-format-check
+  language: python
+  files: (requirements\.txt|pyproject\.toml|setup\.py|poetry\.lock)$
+
+- id: pyshield-typo-check
+  name: PyShield Typosquatting Check
+  description: Detect typosquatting attacks (no network)
+  entry: pyshield-typo-check
+  language: python
+  files: (requirements\.txt|pyproject\.toml|setup\.py|poetry\.lock)$
+
+- id: pyshield-package-check
+  name: PyShield Package Check
+  description: Verify package exists on PyPI
+  entry: pyshield-package-check
+  language: python
+  files: (requirements\.txt|pyproject\.toml|setup\.py|poetry\.lock)$
