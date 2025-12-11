@@ -9,11 +9,10 @@ from cyclonedx.model import (
     ExternalReferenceType,
     HashAlgorithm,
     HashType,
-    OrganizationalContact,
-    OrganizationalEntity,
-    Tool,
     XsUri,
 )
+from cyclonedx.model.contact import OrganizationalContact, OrganizationalEntity
+from cyclonedx.model.tool import Tool
 from cyclonedx.model.bom import Bom
 from cyclonedx.model.component import Component, ComponentType
 from cyclonedx.model.license import License, LicenseExpression
@@ -25,7 +24,7 @@ from cyclonedx.model.vulnerability import (
     BomTarget,
     VulnerabilitySource,
 )
-from cyclonedx.output import OutputFormat, SchemaVersion
+from cyclonedx.schema import OutputFormat, SchemaVersion
 from cyclonedx.output import make_outputter
 from packageurl import PackageURL
 
@@ -42,8 +41,8 @@ class SBOMGenerator:
 
     def __init__(self):
         """Initialize SBOM generator with CycloneDX spec."""
-        # Use V1_4 - most widely supported version
-        self.spec_version = SchemaVersion.V1_4
+        # Use V1_6 - modern, widely adopted version with enhanced features
+        self.spec_version = SchemaVersion.V1_6
 
     def generate_sbom(self, audit_report: AuditReport) -> dict:
         """
@@ -69,7 +68,7 @@ class SBOMGenerator:
             name="PyShield Security Audit Tool",
             version="1.0.0",  # Update from settings if available
         )
-        bom.metadata.tools.add(tool)
+        bom.metadata.tools.tools.add(tool)
 
         # Create main component (the package being audited)
         if audit_report.package_metadata:

@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for pyshield on 2025-12-11T08:06:33-05:00
+# fly.toml app configuration file generated for pyshield on 2025-12-11T08:21:48-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -37,5 +37,6 @@ primary_region = 'ewr'
 
 [[vm]]
   memory = '512mb'
+  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 512

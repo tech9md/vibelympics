@@ -11,7 +11,7 @@
 - **AST-Based Detection** - Advanced static analysis using Python's AST, not just regex
 - **Entropy Analysis** - Detects obfuscated payloads using Shannon entropy calculations
 - **OSV Integration** - Real-time vulnerability data from Google's OSV database
-- **SBOM Generation** - Export CycloneDX 1.6 format for compliance (CISA, EU Cyber Resilience Act)
+- **SBOM Generation** - Export CycloneDX 1.6 (or 1.7) format for compliance (CISA, EU Cyber Resilience Act)
 - **Export Capabilities** - Download reports as JSON or SBOM for CI/CD integration
 - **Database Persistence** - All audits stored with SQLite for audit trails
 - **Rate Limiting** - Production-ready with 10 audits/hour/IP protection
@@ -174,7 +174,7 @@ print(f"\nTotal high-severity findings: {len(high_severity_findings)}")
 ```
 
 **Export as SBOM (CycloneDX)**
-- Download Software Bill of Materials in CycloneDX 1.6 format
+- Download Software Bill of Materials in CycloneDX 1.6 format (1.7 also supported)
 - Industry-standard format for compliance and reporting
 - **File format**: `pyshield-sbom-{package_name}-{version}.cdx.json`
 - **Compatible with**: DependencyTrack, OWASP tools, and other SBOM management platforms
