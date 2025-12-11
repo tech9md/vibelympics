@@ -8,6 +8,7 @@
 - **Powerful CLI** - Command-line interface with fast mode (3-5s), multiple output formats, and CI/CD integration
 - **Pre-commit Hooks** - 3 built-in hooks (format-check, typo-check, package-check) for instant security feedback
 - **Real-time Analysis** - Live progress tracking with detailed status updates
+- **Source Code Links** - Direct links from findings to GitHub source code at specific line numbers
 - **AST-Based Detection** - Advanced static analysis using Python's AST, not just regex
 - **Entropy Analysis** - Detects obfuscated payloads using Shannon entropy calculations
 - **OSV Integration** - Real-time vulnerability data from Google's OSV database
@@ -66,7 +67,7 @@
 
 ### Finding Details
 ![Finding Details](docs/screenshots/finding-details.png)
-*Actionable findings with severity levels and remediation guidance*
+*Actionable findings with severity levels, remediation guidance, and clickable source code links*
 
 ### Severity Filters
 ![Severity Filters](docs/screenshots/severity-filters.png)

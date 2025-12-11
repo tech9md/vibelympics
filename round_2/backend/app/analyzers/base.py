@@ -36,6 +36,7 @@ class Finding:
     location: Optional[Dict[str, Any]] = None
     remediation: Optional[str] = None
     references: List[str] = field(default_factory=list)
+    source_url: Optional[str] = None  # Direct link to source code in repository
     metadata: Dict[str, Any] = field(default_factory=dict)
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
 
@@ -50,6 +51,7 @@ class Finding:
             "location": self.location,
             "remediation": self.remediation,
             "references": self.references,
+            "source_url": self.source_url,
             "metadata": self.metadata,
         }
 

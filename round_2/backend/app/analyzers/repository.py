@@ -3,9 +3,12 @@ import re
 from datetime import datetime, timedelta
 from typing import Dict, Any, List, Optional
 import httpx
+from app.logging_config import get_logger
 from app.analyzers.base import BaseAnalyzer, AnalyzerResult, Finding, SeverityLevel
 from app.config import settings
 from app.utils.cache import github_cache
+
+logger = get_logger(__name__)
 
 
 class RepositoryAnalyzer(BaseAnalyzer):
@@ -91,11 +94,14 @@ class RepositoryAnalyzer(BaseAnalyzer):
         if project_url and ("github.com" in project_url or "gitlab.com" in project_url):
             return project_url
 
-        # Check project_urls dict
+        # Check project_urls dict (case-insensitive)
         project_urls = metadata.get("project_urls", {}) or {}
-        for key in ["Repository", "Source", "Source Code", "GitHub", "Code"]:
-            if key in project_urls:
-                return project_urls[key]
+        if project_urls:
+            # Create case-insensitive lookup
+            project_urls_lower = {k.lower(): v for k, v in project_urls.items()}
+            for key in ["repository", "source", "source code", "github", "code"]:
+                if key in project_urls_lower:
+                    return project_urls_lower[key]
 
         # Check home_page
         home_page = metadata.get("home_page")

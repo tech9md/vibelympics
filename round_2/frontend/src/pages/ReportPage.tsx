@@ -601,9 +601,25 @@ export default function ReportPage() {
                           </p>
                         )}
                         {finding.location?.file && (
-                          <p className="text-slate-500 text-xs mt-2">
-                            📁 {finding.location.file}
-                            {finding.location.line && `:${finding.location.line}`}
+                          <p className="text-slate-500 text-xs mt-2 flex items-center gap-1">
+                            📁
+                            {finding.source_url ? (
+                              <a
+                                href={finding.source_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-400 hover:underline flex items-center gap-1"
+                              >
+                                {finding.location.file}
+                                {finding.location.line && `:${finding.location.line}`}
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            ) : (
+                              <span>
+                                {finding.location.file}
+                                {finding.location.line && `:${finding.location.line}`}
+                              </span>
+                            )}
                           </p>
                         )}
                       </div>

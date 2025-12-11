@@ -6,6 +6,7 @@ import uuid
 
 from app.logging_config import get_logger
 from app.utils.errors import sanitize_error_message
+from app.utils.source_url_builder import SourceURLBuilder
 from app.services.pypi_client import PyPIClient
 from app.services.package_fetcher import PackageFetcher
 from app.analyzers.base import AnalyzerResult, SeverityLevel
@@ -134,6 +135,60 @@ class AuditOrchestrator:
             f"Please try again or check: https://pypi.org/project/{package_name}/"
         )
 
+    def _populate_source_urls(
+        self, results: Dict[str, AnalyzerResult], package_name: str
+    ) -> None:
+        """
+        Add source code URLs to all findings that have file locations.
+
+        This method enriches findings with direct links to the source code in the
+        repository, making it easy for users to navigate directly to problematic code.
+
+        Args:
+            results: Dictionary of analyzer results containing findings
+            package_name: Name of the package being audited
+
+        Note:
+            Modifies findings in-place by setting their source_url attribute.
+        """
+        # Extract repository URL from repository analyzer results
+        repo_result = results.get("repository")
+        if not repo_result or not repo_result.metadata:
+            logger.info(f"No repository result found for {package_name}")
+            return
+
+        repo_url = repo_result.metadata.get("repo_url")
+        if not repo_url:
+            logger.info(f"No repo_url in metadata for {package_name}. Metadata keys: {list(repo_result.metadata.keys())}")
+            return
+
+        logger.info(f"Found repository URL for {package_name}: {repo_url}")
+
+        # Detect default branch (could be enhanced to check actual default branch)
+        branch = SourceURLBuilder.get_default_branch(repo_url)
+
+        # Populate source URLs for all findings across all categories
+        url_count = 0
+        first_finding_logged = False
+        for category, result in results.items():
+            for finding in result.findings:
+                if finding.location and finding.location.get("file"):
+                    # Build source URL from finding location
+                    source_url = SourceURLBuilder.build_url_from_finding_location(
+                        finding.location, repo_url, branch
+                    )
+                    if source_url:
+                        finding.source_url = source_url
+                        url_count += 1
+                        if not first_finding_logged:
+                            logger.info(f"Example source URL: {source_url}")
+                            first_finding_logged = True
+                    elif not first_finding_logged:
+                        logger.warning(f"Failed to build source URL for {finding.location}")
+                        first_finding_logged = True
+
+        logger.info(f"Populated {url_count} source URLs for {package_name}")
+
     async def run_audit(
         self,
         package_name: str,
@@ -246,6 +301,9 @@ class AuditOrchestrator:
         # Final progress update
         if on_progress:
             on_progress("complete", completed_analyzers.copy(), 100)
+
+        # 3c. Add source URLs to findings (if repository available)
+        self._populate_source_urls(results, package_name)
 
         # 4. Calculate overall score
         overall_score = self._calculate_overall_score(results)

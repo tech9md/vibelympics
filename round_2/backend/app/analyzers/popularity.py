@@ -70,15 +70,18 @@ class PopularityAnalyzer(BaseAnalyzer):
         )
 
     def _extract_repo_url(self, metadata: Dict[str, Any]) -> Optional[str]:
-        """Extract repository URL from metadata."""
+        """Extract repository URL from metadata (case-insensitive)."""
         project_url = metadata.get("project_url")
         if project_url and ("github.com" in project_url or "gitlab.com" in project_url):
             return project_url
 
+        # Case-insensitive project_urls lookup
         project_urls = metadata.get("project_urls", {}) or {}
-        for key in ["Repository", "Source", "Source Code", "GitHub", "Code"]:
-            if key in project_urls:
-                return project_urls[key]
+        if project_urls:
+            project_urls_lower = {k.lower(): v for k, v in project_urls.items()}
+            for key in ["repository", "source", "source code", "github", "code"]:
+                if key in project_urls_lower:
+                    return project_urls_lower[key]
 
         home_page = metadata.get("home_page")
         if home_page and ("github.com" in home_page or "gitlab.com" in home_page):

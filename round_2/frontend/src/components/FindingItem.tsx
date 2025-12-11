@@ -65,27 +65,45 @@ export default function FindingItem({ finding }: FindingItemProps) {
 
   return (
     <div className="bg-slate-900/50 rounded-lg border border-slate-700/50 overflow-hidden">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-3 flex items-start gap-3 text-left hover:bg-slate-800/50 transition-colors"
-      >
-        <SeverityBadge severity={finding.severity} size="sm" />
-        <div className="flex-1 min-w-0">
-          <p className="text-white font-medium text-sm">{finding.title}</p>
-          {finding.location?.file && (
-            <p className="text-slate-500 text-xs mt-1 flex items-center gap-1">
-              <FileCode className="w-3 h-3" />
-              {finding.location.file}
-              {finding.location.line && `:${finding.location.line}`}
-            </p>
+      <div className="p-3">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full flex items-start gap-3 text-left hover:bg-slate-800/30 transition-colors rounded p-2 -m-2"
+        >
+          <SeverityBadge severity={finding.severity} size="sm" />
+          <div className="flex-1 min-w-0">
+            <p className="text-white font-medium text-sm">{finding.title}</p>
+          </div>
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4 text-slate-400 flex-shrink-0" />
+          ) : (
+            <ChevronDown className="w-4 h-4 text-slate-400 flex-shrink-0" />
           )}
-        </div>
-        {isExpanded ? (
-          <ChevronUp className="w-4 h-4 text-slate-400 flex-shrink-0" />
-        ) : (
-          <ChevronDown className="w-4 h-4 text-slate-400 flex-shrink-0" />
+        </button>
+
+        {finding.location?.file && (
+          <div className="text-slate-500 text-xs mt-2 flex items-center gap-1 ml-1">
+            <FileCode className="w-3 h-3" />
+            {finding.source_url ? (
+              <a
+                href={finding.source_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:underline flex items-center gap-1"
+              >
+                {finding.location.file}
+                {finding.location.line && `:${finding.location.line}`}
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            ) : (
+              <span>
+                {finding.location.file}
+                {finding.location.line && `:${finding.location.line}`}
+              </span>
+            )}
+          </div>
         )}
-      </button>
+      </div>
 
       {isExpanded && (
         <div className="px-3 pb-3 space-y-3">

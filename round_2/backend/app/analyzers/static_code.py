@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional, Set, Tuple
 from collections import Counter
 from app.analyzers.base import BaseAnalyzer, AnalyzerResult, Finding, SeverityLevel
+from app.analyzers.security_references import SecurityReferences
 
 
 class StaticCodeAnalyzer(BaseAnalyzer):
@@ -282,6 +283,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                             description=f"The function '{func_name}' can execute arbitrary code and poses a security risk.",
                             location={"file": file_path, "line": node.lineno},
                             remediation=f"Review the use of '{func_name}' and ensure it's not processing untrusted input.",
+                            references=SecurityReferences.get_references_for_function(func_name),
                             metadata={"function": func_name, "has_dynamic_input": self._has_dynamic_input(node)},
                         )
                     )
@@ -298,6 +300,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                             title=f"Suspicious module access: {full_name}",
                             description=f"Access to '{full_name}' detected. This could be used for malicious purposes.",
                             location={"file": file_path, "line": node.lineno},
+                            references=SecurityReferences.get_references_for_import(full_name),
                         )
                     )
 
@@ -319,6 +322,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                         description=f"Found suspicious obfuscation pattern that may hide malicious code.",
                         location={"file": file_path, "line": line_no},
                         remediation="Investigate this code carefully. Obfuscation is often used to hide malicious behavior.",
+                        references=SecurityReferences.get_obfuscation_references(name),
                         metadata={"pattern": name, "match": match.group()[:100]},
                     )
                 )
@@ -346,6 +350,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                         description=f"Found a string with entropy {entropy:.2f}, which may be an encoded payload or encrypted data.",
                         location={"file": file_path, "line": line_no},
                         remediation="Review this string to determine if it's legitimate (e.g., encryption key) or potentially malicious.",
+                        references=SecurityReferences.get_high_entropy_references(),
                         metadata={"entropy": round(entropy, 2), "length": len(string)},
                     )
                 )
@@ -369,6 +374,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                         description="Network operations in setup.py execute during installation and could download malicious code.",
                         location={"file": file_path, "line": line_no},
                         remediation="Avoid network operations in setup.py. Package all necessary code in the distribution.",
+                        references=SecurityReferences.get_setup_network_references(),
                     )
                 )
 
@@ -384,6 +390,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                         title=f"File system operation in setup.py: {name}",
                         description="Dangerous file operations in setup.py could damage the system during installation.",
                         location={"file": file_path, "line": line_no},
+                        references=SecurityReferences.get_filesystem_references(name),
                     )
                 )
 
@@ -397,6 +404,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                     description="Subprocess calls in setup.py can execute arbitrary commands during package installation.",
                     location={"file": file_path},
                     remediation="Avoid subprocess calls in setup.py. Use Python-native solutions instead.",
+                    references=SecurityReferences.get_setup_subprocess_references(),
                 )
             )
 
@@ -427,6 +435,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                                 title=f"Suspicious import: {module}",
                                 description=f"Import of '{module}' module detected. This module provides capabilities that could be misused.",
                                 location={"file": file_path, "line": node.lineno},
+                                references=SecurityReferences.get_references_for_import(module),
                                 metadata={"module": module, "in_setup": is_setup_file},
                             )
                         )
@@ -447,6 +456,7 @@ class StaticCodeAnalyzer(BaseAnalyzer):
                                 title=f"Suspicious import: {full_import}",
                                 description=f"Import of '{full_import}' detected.",
                                 location={"file": file_path, "line": node.lineno},
+                                references=SecurityReferences.get_references_for_import(check_name),
                                 metadata={"module": full_import, "in_setup": is_setup_file},
                             )
                         )

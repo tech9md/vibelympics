@@ -17,6 +17,7 @@ export interface Finding {
   remediation?: string;
   references: string[];
   metadata: Record<string, unknown>;
+  source_url?: string;
 }
 
 export interface CategoryResult {

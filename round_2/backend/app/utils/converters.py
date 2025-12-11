@@ -192,6 +192,7 @@ def finding_to_schema(finding: Finding) -> FindingSchema:
         location=finding.location,
         remediation=finding.remediation,
         references=finding.references,
+        source_url=finding.source_url,
         metadata=finding.metadata,
     )
 

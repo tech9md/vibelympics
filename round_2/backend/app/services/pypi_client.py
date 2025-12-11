@@ -128,15 +128,16 @@ class PyPIClient:
                 except (ValueError, TypeError):
                     pass
 
-        # Extract project URLs
+        # Extract project URLs (case-insensitive)
         project_urls = info.get("project_urls") or {}
-        repository_url = (
-            project_urls.get("Repository")
-            or project_urls.get("Source")
-            or project_urls.get("Source Code")
-            or project_urls.get("GitHub")
-            or project_urls.get("Homepage")
-        )
+        repository_url = None
+        if project_urls:
+            # Create case-insensitive lookup
+            project_urls_lower = {k.lower(): v for k, v in project_urls.items()}
+            for key in ["repository", "source", "source code", "github", "homepage"]:
+                if key in project_urls_lower:
+                    repository_url = project_urls_lower[key]
+                    break
 
         # Get maintainers
         maintainers = []

@@ -49,6 +49,7 @@ class Finding(BaseModel):
     location: Optional[Dict[str, Any]] = None
     remediation: Optional[str] = None
     references: List[str] = []
+    source_url: Optional[str] = None  # Direct link to source code in repository
     metadata: Dict[str, Any] = {}
 
 

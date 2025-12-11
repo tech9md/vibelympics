@@ -4,6 +4,7 @@ import re
 import os
 from typing import Dict, Any, List, Optional, Tuple
 from app.analyzers.base import BaseAnalyzer, AnalyzerResult, Finding, SeverityLevel
+from app.analyzers.security_references import SecurityReferences
 
 
 class BehavioralAnalyzer(BaseAnalyzer):
@@ -208,6 +209,7 @@ class BehavioralAnalyzer(BaseAnalyzer):
                         title=title,
                         description=f"{description}. Found in {'__init__.py' if is_init else 'module'} which {'executes on import' if is_init else 'may execute at runtime'}.",
                         location={"file": file_path, "line": line_no},
+                        references=SecurityReferences.get_references_for_pattern(name),
                         metadata={"pattern": name, "in_init": is_init},
                     )
                 )
@@ -243,6 +245,17 @@ class BehavioralAnalyzer(BaseAnalyzer):
                             elif severity == SeverityLevel.MEDIUM:
                                 severity = SeverityLevel.HIGH
 
+                        # Determine pattern name for references
+                        pattern_name = None
+                        if (module, attr) == ("sys", "meta_path"):
+                            pattern_name = "import_hook_meta_path"
+                        elif (module, attr) == ("sys", "path_hooks"):
+                            pattern_name = "import_hook_path_hooks"
+                        elif (module, attr) == ("sys", "modules"):
+                            pattern_name = "module_injection"
+                        elif (module, attr) == ("sys", "_getframe"):
+                            pattern_name = "frame_access"
+
                         findings.append(
                             Finding(
                                 category=self.category,
@@ -250,6 +263,7 @@ class BehavioralAnalyzer(BaseAnalyzer):
                                 title=f"{module}.{attr} access detected",
                                 description=f"{desc}. Context: {parent}",
                                 location={"file": file_path, "line": node.lineno},
+                                references=SecurityReferences.get_references_for_pattern(pattern_name) if pattern_name else [],
                                 metadata={"module": module, "attribute": attr, "context": parent},
                             )
                         )
@@ -265,6 +279,7 @@ class BehavioralAnalyzer(BaseAnalyzer):
                             title=f"Module-level {func_name}() execution",
                             description=f"{func_name}() called at module level, executes during import.",
                             location={"file": file_path, "line": node.lineno},
+                            references=SecurityReferences.get_references_for_pattern("module_level_exec"),
                             metadata={"function": func_name},
                         )
                     )
@@ -300,6 +315,10 @@ class BehavioralAnalyzer(BaseAnalyzer):
 
         for func_name, line_no in suspicious_module_calls:
             if func_name in suspicious_functions:
+                # Determine if it's a network operation
+                is_network = any(net in func_name for net in ["request", "urllib", "socket"])
+                pattern_ref = "module_level_network" if is_network else "module_level_exec"
+
                 findings.append(
                     Finding(
                         category=self.category,
@@ -307,6 +326,7 @@ class BehavioralAnalyzer(BaseAnalyzer):
                         title=f"Module-level {func_name}() call",
                         description=f"Potentially dangerous function called at import time.",
                         location={"file": file_path, "line": line_no},
+                        references=SecurityReferences.get_references_for_pattern(pattern_ref),
                         metadata={"function": func_name, "in_init": is_init},
                     )
                 )
