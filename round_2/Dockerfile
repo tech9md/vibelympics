@@ -34,6 +34,9 @@ COPY --from=frontend-builder /app/frontend/dist ./static
 # Create temp directory for package downloads
 RUN mkdir -p /tmp/pyshield
 
+# Create data directory for persistent storage (database, logs)
+RUN mkdir -p /data && chmod 755 /data
+
 # Environment variables
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1

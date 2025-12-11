@@ -868,6 +868,296 @@ CACHE_TTL_SECONDS=3600           # 1 hour cache for API responses
 | `MAX_PACKAGE_SIZE_MB` | Maximum package size to analyze | `50` |
 | `CACHE_TTL_SECONDS` | How long to cache API responses | `3600` (1 hour) |
 
+## Deployment
+
+PyShield can be deployed using Docker Compose for local/self-hosted deployments or cloud platforms like Fly.io for production.
+
+### Docker Compose Deployment (Local/Self-Hosted)
+
+The easiest way to deploy PyShield is using Docker Compose:
+
+```bash
+# Clone the repository
+git clone https://github.com/your-org/pyshield.git
+cd pyshield
+
+# Build and run
+docker-compose up --build -d
+
+# Check status
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+
+# Access at http://localhost:8000
+```
+
+**Accessing the Application:**
+- Web UI: [http://localhost:8000](http://localhost:8000)
+- API: [http://localhost:8000/api/v1](http://localhost:8000/api/v1)
+- API Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+**Production Docker Compose:**
+- Update `.env` file with production settings
+- Configure CORS_ORIGINS to your domain
+- Use HTTPS with a reverse proxy (Nginx, Caddy, Traefik)
+- Set up regular database backups
+- Monitor logs and resource usage
+
+### Fly.io Deployment (Cloud Platform)
+
+PyShield includes a production-ready Fly.io configuration with **persistent database storage**.
+
+#### Prerequisites
+
+1. Install Fly CLI:
+```bash
+# macOS
+brew install flyctl
+
+# Linux/WSL
+curl -L https://fly.io/install.sh | sh
+
+# Windows (PowerShell)
+iwr https://fly.io/install.ps1 -useb | iex
+```
+
+2. Sign up and authenticate:
+```bash
+fly auth signup  # Or: fly auth login
+```
+
+#### Initial Deployment
+
+1. **Create the Fly app** (first time only):
+```bash
+# Launch the app (interactive setup)
+fly launch
+
+# Follow prompts:
+# - Choose app name (or use auto-generated)
+# - Select region (choose closest to your users)
+# - Don't deploy yet (we need to create the volume first)
+```
+
+2. **Create persistent volume for database**:
+```bash
+# Create 1GB volume for SQLite database
+fly volumes create pyshield_data --size 1
+
+# Verify volume creation
+fly volumes list
+```
+
+3. **Configure secrets** (environment variables):
+```bash
+# Set production CORS origins (required)
+fly secrets set CORS_ORIGINS="https://your-app.fly.dev"
+
+# Optional: GitHub token for higher rate limits
+fly secrets set GITHUB_TOKEN="your_github_token_here"
+
+# Optional: Set log level
+fly secrets set LOG_LEVEL="INFO"
+```
+
+4. **Deploy the application**:
+```bash
+# Deploy to Fly.io
+fly deploy
+
+# Your app will be available at: https://your-app.fly.dev
+```
+
+#### Fly.io Configuration Details
+
+The [fly.toml](fly.toml) configuration includes:
+
+**Persistent Volume:**
+- 1GB volume mounted at `/data`
+- Stores SQLite database (`/data/pyshield.db`)
+- Stores application logs (`/data/pyshield.log`)
+- **Survives machine restarts** (critical for database persistence)
+
+**Resource Allocation:**
+- 1 shared CPU
+- 512MB RAM
+- Auto-start/stop for cost efficiency
+- Minimum 1 machine running
+
+**Health Checks:**
+- HTTP check every 30s on `/api/v1/health`
+- 10s timeout with 10s grace period
+
+**Environment Variables:**
+```bash
+DATABASE_URL=sqlite+aiosqlite:////data/pyshield.db
+LOG_FILE=/data/pyshield.log
+PYTHONUNBUFFERED=1
+```
+
+#### Managing Your Fly.io Deployment
+
+**View logs:**
+```bash
+# Live logs
+fly logs
+
+# Filter by level
+fly logs | grep ERROR
+```
+
+**Check app status:**
+```bash
+fly status
+fly checks
+```
+
+**Scale resources:**
+```bash
+# Increase memory to 1GB
+fly scale memory 1024
+
+# Add more machines (horizontal scaling)
+fly scale count 2
+```
+
+**SSH into the machine:**
+```bash
+fly ssh console
+cd /data  # Check database and logs
+```
+
+**Database backups:**
+```bash
+# Create backup of persistent volume
+fly volumes list  # Get volume ID
+fly volumes snapshots create <volume-id>
+
+# List snapshots
+fly volumes snapshots list <volume-id>
+```
+
+**Update deployment:**
+```bash
+# Deploy new version
+fly deploy
+
+# Redeploy without changes
+fly deploy --no-cache
+```
+
+**Destroy app** (when no longer needed):
+```bash
+# Delete volume snapshots first
+fly volumes snapshots list <volume-id>
+fly volumes snapshots delete <snapshot-id>
+
+# Delete volume
+fly volumes delete <volume-id>
+
+# Delete app
+fly apps destroy your-app-name
+```
+
+#### Troubleshooting Fly.io Deployment
+
+**"Audit not found" errors:**
+- **Cause**: Volume not properly mounted or database using ephemeral storage
+- **Fix**: Verify volume is created and mounted:
+  ```bash
+  fly volumes list  # Should show pyshield_data volume
+  fly ssh console
+  ls -la /data      # Should show pyshield.db
+  ```
+
+**Application not starting:**
+- Check logs: `fly logs`
+- Verify secrets are set: `fly secrets list`
+- Check machine status: `fly status`
+- Restart machines: `fly machine restart <machine-id>`
+
+**CORS errors:**
+- Update CORS_ORIGINS secret: `fly secrets set CORS_ORIGINS="https://your-app.fly.dev"`
+- Redeploy: `fly deploy`
+
+**Database full:**
+- Check volume size: `fly volumes list`
+- Extend volume: `fly volumes extend <volume-id> --size 2`
+- Clean up old audits from database
+
+**High costs:**
+- Enable auto-stop: Already configured in fly.toml
+- Reduce to 0 machines when not in use: `fly scale count 0`
+- Scale back up when needed: `fly scale count 1`
+
+#### Production Recommendations for Fly.io
+
+1. **Use PostgreSQL for production** (optional, for high-scale deployments):
+   ```bash
+   # Create Fly Postgres cluster
+   fly postgres create
+
+   # Get connection string
+   fly postgres connect -a your-postgres-app
+
+   # Set DATABASE_URL secret
+   fly secrets set DATABASE_URL="postgresql://..."
+   ```
+
+2. **Enable metrics and monitoring**:
+   ```bash
+   # View metrics
+   fly dashboard
+   ```
+
+3. **Set up automated backups**:
+   - Schedule daily volume snapshots
+   - Export audit data to external storage (S3, etc.)
+
+4. **Use custom domain**:
+   ```bash
+   # Add custom domain
+   fly certs add yourdomain.com
+
+   # Update DNS records as shown in output
+   # Update CORS_ORIGINS secret with new domain
+   ```
+
+5. **Enable DDoS protection**:
+   - Configure Fly.io's built-in DDoS protection
+   - Adjust rate limiting in application settings
+
+### Other Cloud Platforms
+
+PyShield can be deployed to any platform supporting Docker:
+
+**AWS ECS/Fargate:**
+- Use provided Dockerfile
+- Configure EFS for persistent storage
+- Set environment variables via ECS task definition
+
+**Google Cloud Run:**
+- Build and push to Google Container Registry
+- Mount Cloud Storage for database (or use Cloud SQL)
+- Configure secrets via Secret Manager
+
+**Azure Container Instances:**
+- Push to Azure Container Registry
+- Use Azure Files for persistent storage
+- Configure environment variables
+
+**DigitalOcean App Platform:**
+- Connect GitHub repository
+- Configure persistent volume
+- Set environment variables in dashboard
+
+**Kubernetes (K8s):**
+- Use provided Dockerfile
+- Create PersistentVolumeClaim for database
+- Deploy using Helm chart or kubectl manifests
+
 ## Security
 
 PyShield is designed with security best practices for both analyzing packages and protecting the application itself.

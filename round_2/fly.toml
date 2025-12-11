@@ -1,0 +1,45 @@
+# Fly.io configuration for PyShield
+# Generated for deployment with persistent database storage
+
+app = "vibelympics-round2"
+primary_region = "ord"
+
+# Build configuration
+[build]
+  dockerfile = "Dockerfile"
+
+# HTTP service
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  # HTTP service checks
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "10s"
+    grace_period = "10s"
+    method = "get"
+    path = "/api/v1/health"
+
+# Persistent volume for database
+[[mounts]]
+  source = "pyshield_data"
+  destination = "/data"
+  initial_size = "1gb"
+
+# Environment variables
+[env]
+  DATABASE_URL = "sqlite+aiosqlite:////data/pyshield.db"
+  PYTHONUNBUFFERED = "1"
+  PYTHONDONTWRITEBYTECODE = "1"
+  LOG_FILE = "/data/pyshield.log"
+
+# VM resources
+[vm]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512
