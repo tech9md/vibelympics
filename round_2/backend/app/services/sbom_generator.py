@@ -42,8 +42,8 @@ class SBOMGenerator:
 
     def __init__(self):
         """Initialize SBOM generator with CycloneDX spec."""
-        # Use V1_6 for CycloneDX SBOM generation
-        self.spec_version = SchemaVersion.V1_6
+        # Use V1_4 - most widely supported version
+        self.spec_version = SchemaVersion.V1_4
 
     def generate_sbom(self, audit_report: AuditReport) -> dict:
         """

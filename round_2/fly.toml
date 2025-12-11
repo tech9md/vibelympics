@@ -1,45 +1,41 @@
-# Fly.io configuration for PyShield
-# Generated for deployment with persistent database storage
+# fly.toml app configuration file generated for pyshield on 2025-12-11T08:06:33-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "vibelympics-round2"
-primary_region = "ord"
+app = 'pyshield'
+primary_region = 'ewr'
 
-# Build configuration
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
-# HTTP service
+[env]
+  DATABASE_URL = 'sqlite+aiosqlite:////data/pyshield.db'
+  LOG_FILE = '/data/pyshield.log'
+  PYTHONDONTWRITEBYTECODE = '1'
+  PYTHONUNBUFFERED = '1'
+
+[[mounts]]
+  source = 'pyshield_data'
+  destination = '/data'
+  initial_size = '1gb'
+
 [http_service]
   internal_port = 8000
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 1
-  processes = ["app"]
+  processes = ['app']
 
-  # HTTP service checks
   [[http_service.checks]]
-    interval = "30s"
-    timeout = "10s"
-    grace_period = "10s"
-    method = "get"
-    path = "/api/v1/health"
+    interval = '30s'
+    timeout = '10s'
+    grace_period = '10s'
+    method = 'get'
+    path = '/api/v1/health'
 
-# Persistent volume for database
-[[mounts]]
-  source = "pyshield_data"
-  destination = "/data"
-  initial_size = "1gb"
-
-# Environment variables
-[env]
-  DATABASE_URL = "sqlite+aiosqlite:////data/pyshield.db"
-  PYTHONUNBUFFERED = "1"
-  PYTHONDONTWRITEBYTECODE = "1"
-  LOG_FILE = "/data/pyshield.log"
-
-# VM resources
-[vm]
-  cpu_kind = "shared"
+[[vm]]
+  memory = '512mb'
   cpus = 1
   memory_mb = 512
