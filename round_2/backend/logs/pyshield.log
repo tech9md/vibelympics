@@ -252,3 +252,12 @@ NoneType: None
 2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for test-package@1.0.0
 2025-12-10 15:42:25 | WARNING  | app.analyzers.vulnerability:_query_osv_package:147 | OSV API query failed for package test-package: Network error
 2025-12-10 15:42:25 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 2 vulnerabilities for test-package@1.0.0
+2025-12-12 08:08:27 | INFO     | root:setup_logging:76 | Logging configured: level=INFO, file=logs\pyshield.log
+2025-12-12 08:08:28 | INFO     | app.services.orchestrator:run_audit:212 | Starting audit c637ca94-fa42-4745-aee9-7d80eac0709f for package: requests@latest
+2025-12-12 08:08:28 | INFO     | app.services.orchestrator:run_audit:224 | Analyzing requests@2.32.5
+2025-12-12 08:08:30 | INFO     | app.services.orchestrator:run_audit:233 | Package extracted to: \tmp\pyshield\requests-2.32.5\requests-2.32.5
+2025-12-12 08:08:32 | INFO     | app.analyzers.vulnerability:_query_osv:88 | OSV API returned 0 vulnerabilities for requests@2.32.5
+2025-12-12 08:08:44 | INFO     | app.services.orchestrator:_populate_source_urls:165 | Found repository URL for requests: https://github.com/psf/requests
+2025-12-12 08:08:44 | INFO     | app.services.orchestrator:_populate_source_urls:184 | Example source URL: https://github.com/psf/requests/blob/main/setup.py#L54
+2025-12-12 08:08:44 | INFO     | app.services.orchestrator:_populate_source_urls:190 | Populated 65 source URLs for requests
+2025-12-12 08:08:44 | INFO     | app.services.orchestrator:run_audit:366 | Audit c637ca94-fa42-4745-aee9-7d80eac0709f completed for requests@2.32.5: score=52.59, risk=medium, duration=16892ms

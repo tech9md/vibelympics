@@ -16,6 +16,7 @@
 - **Export Capabilities** - Download reports as JSON or SBOM for CI/CD integration
 - **Database Persistence** - All audits stored with SQLite for audit trails
 - **Rate Limiting** - Production-ready with 10 audits/hour/IP protection
+- **Chainguard Security** - Distroless container images with minimal attack surface and SLSA compliance
 - **200+ Tests** - Comprehensive test suite with 93-97% coverage on critical analyzers
 
 ## 🎯 Why PyShield?
@@ -1194,20 +1195,29 @@ PyShield automatically applies security headers to all responses:
 - Static analysis only (AST parsing, pattern matching)
 - Automatic cleanup of temporary files
 
-**5. Error Handling & Logging**
+**5. Container Security (Chainguard Images)**
+- **Distroless base images** from Chainguard for minimal attack surface
+- **No shell or package manager** in production runtime (eliminates shell-based attacks)
+- **SLSA Level 3 compliance** with signed, verifiable images
+- **Daily automated security updates** and vulnerability scanning
+- **Reduced image size** (50-80% smaller than traditional base images)
+- **Non-root user** (runs as `nonroot` user by default)
+- Multi-stage build isolates build dependencies from runtime
+
+**6. Error Handling & Logging**
 - Structured logging system with automatic rotation (10MB files, 5 backups)
 - Production mode: Generic error messages prevent information disclosure
 - Development mode: Detailed error messages for debugging
 - All security events and errors are logged server-side
 - Configurable log levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 
-**6. Database Security**
+**7. Database Security**
 - SQLite database with async sessions (SQLAlchemy 2.0+)
 - All audit results persisted for audit trails
 - Parameterized queries prevent SQL injection
 - Automatic schema initialization and migrations
 
-**7. Dependency Security
+**8. Dependency Security**
 - Python 3.13 compatible dependencies
 - Regular security updates via Dependabot
 - No known CVEs in production dependencies
@@ -1585,7 +1595,7 @@ round_2/
 
 - **Backend:** Python 3.11+, FastAPI, SQLite
 - **Frontend:** React, TypeScript, Vite, TailwindCSS
-- **Container:** Docker
+- **Container:** Docker with Chainguard images (distroless, minimal attack surface)
 - **Testing:** pytest, pytest-asyncio, pytest-cov
 
 ## Requirements
